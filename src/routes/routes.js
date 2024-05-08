@@ -16,27 +16,39 @@ authRouter.post('/signup', async (req, res, next) => {
       token: userRecord.token,
     };
     res.status(201).json(output);
-  } catch (e) {
-    next(e.message);
+  } catch (error) {
+    next(error); // Pass the error to the error handler middleware
   }
 });
 
 authRouter.post('/signin', basicAuth, (req, res, next) => {
-  const user = {
-    user: req.user,
-    token: req.user.token,
-  };
-  res.status(200).json(user);
+  try {
+    const user = {
+      user: req.user,
+      token: req.user.token,
+    };
+    res.status(200).json(user);
+  } catch (error) {
+    next(error); // Pass the error to the error handler middleware
+  }
 });
 
 authRouter.get('/users', bearerAuth, permissions('delete'), async (req, res, next) => {
-  const userRecords = await users.findAll({});
-  const list = userRecords.map((user) => user.username);
-  res.status(200).json(list);
+  try {
+    const userRecords = await users.findAll({});
+    const list = userRecords.map((user) => user.username);
+    res.status(200).json(list);
+  } catch (error) {
+    next(error); // Pass the error to the error handler middleware
+  }
 });
 
 authRouter.get('/secret', bearerAuth, async (req, res, next) => {
-  res.status(200).send('Welcome to the secret area');
+  try {
+    res.status(200).send('Welcome to the secret area');
+  } catch (error) {
+    next(error); // Pass the error to the error handler middleware
+  }
 });
 
 module.exports = authRouter;
