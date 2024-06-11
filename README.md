@@ -1,4 +1,12 @@
 # auth-api
+
+lab32 render site use with API: 
+todo list 
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-7.png)
+
+
 Authentication Server Phase 3: Role Based Access Control
 
 -[class 8 instructor README](https://github.com/codefellows/seattle-javascript-401d58/tree/main/class-08)
